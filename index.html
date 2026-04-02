@@ -3,171 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KLC - 혁신과 신뢰의 파트너</title>
+    <title>KLC | Korea Leading Consulting</title>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
     <style>
-        /* 1. CSS Reset & Base Styles */
+        /* 1. 변수 설정 (아이기삼 스타일 컬러) */
         :root {
-            --primary-color: #0047AB; /* KLC 메인 블루 */
-            --secondary-color: #002D62; /* 짙은 네이비 */
-            --text-dark: #333333;
-            --text-light: #666666;
-            --bg-light: #f9f9f9;
+            --primary: #1a2a4e;    /* 신뢰감 있는 다크 네이비 */
+            --accent: #d4af37;     /* 포인트 골드/옐로우 (선택사항) */
+            --text-main: #222222;
+            --text-sub: #666666;
+            --bg-gray: #f8f9fa;
             --white: #ffffff;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Noto Sans KR', sans-serif; color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        body { font-family: 'Noto Sans KR', sans-serif; color: var(--text-main); line-height: 1.7; word-break: keep-all; }
+        a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
-        
-        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .section-title { text-align: center; font-size: 2.5rem; font-weight: 700; color: var(--secondary-color); margin-bottom: 1rem; }
-        .section-subtitle { text-align: center; font-size: 1.1rem; color: var(--text-light); margin-bottom: 4rem; font-weight: 300; }
+        img { max-width: 100%; display: block; }
 
-        /* 2. Header & Navigation */
-        header { width: 100%; height: 80px; background: var(--white); position: fixed; top: 0; left: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: flex; align-items: center; }
-        .header-container { display: flex; justify-content: space-between; align-items: center; width: 90%; max-width: 1200px; margin: 0 auto; }
-        .logo a { font-size: 1.8rem; font-weight: 700; color: var(--primary-color); letter-spacing: -1px; }
-        
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a { font-size: 1rem; font-weight: 500; color: var(--text-dark); }
-        .nav-links a:hover { color: var(--primary-color); }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
 
-        /* 3. Hero Section (메인 비주얼) */
-        .hero { height: 100vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1600') no-repeat center center/cover; display: flex; align-items: center; justify-content: center; color: var(--white); text-align: center; margin-top: 80px; }
-        .hero-content h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.2; margin-bottom: 1.5rem; letter-spacing: -1px; }
-        .hero-content p { font-size: 1.25rem; font-weight: 300; margin-bottom: 2.5rem; opacity: 0.9; }
-        .btn { padding: 12px 30px; background-color: var(--primary-color); color: var(--white); border-radius: 5px; font-weight: 500; border: 2px solid var(--primary-color); }
-        .btn:hover { background-color: transparent; color: var(--white); }
+        /* 2. Header (아이기삼처럼 깔끔하게) */
+        header { 
+            width: 100%; height: 90px; background: rgba(255,255,255,0.95); 
+            position: fixed; top: 0; z-index: 1000; border-bottom: 1px solid #eee;
+            display: flex; align-items: center;
+        }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo { font-size: 24px; font-weight: 900; color: var(--primary); letter-spacing: 1px; }
+        .nav-menu { display: flex; gap: 40px; }
+        .nav-menu a { font-size: 16px; font-weight: 500; color: #333; transition: 0.3s; }
+        .nav-menu a:hover { color: var(--primary); font-weight: 700; }
 
-        /* 4. About Section */
-        .about { padding: 100px 0; background-color: var(--white); }
-        .about-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-        .about-text h3 { font-size: 2rem; color: var(--secondary-color); margin-bottom: 1.5rem; }
-        .about-text p { color: var(--text-light); margin-bottom: 1rem; font-size: 1.05rem; }
-        .about-img img { width: 100%; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        /* 3. Visual Hero (아이기삼 스타일의 압도적인 첫인상) */
+        .hero { 
+            height: 80vh; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+            url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1600') no-repeat center center/cover;
+            display: flex; align-items: center; color: var(--white); margin-top: 90px;
+        }
+        .hero-content h2 { font-size: 52px; font-weight: 700; line-height: 1.2; margin-bottom: 20px; }
+        .hero-content p { font-size: 20px; font-weight: 300; margin-bottom: 40px; opacity: 0.9; }
 
-        /* 5. Services Section */
-        .services { padding: 100px 0; background-color: var(--bg-light); }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .service-item { background: var(--white); padding: 40px; border-radius: 10px; border: 1px solid #eee; transition: 0.3s; text-align: center; }
-        .service-item:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); border-color: var(--primary-color); }
-        .icon { font-size: 3rem; color: var(--primary-color); margin-bottom: 20px; }
-        .service-item h4 { font-size: 1.5rem; margin-bottom: 15px; color: var(--secondary-color); }
-        .service-item p { color: var(--text-light); font-size: 0.95rem; }
+        /* 4. Section 공통 스타일 */
+        section { padding: 120px 0; }
+        .sec-title { text-align: center; margin-bottom: 60px; }
+        .sec-title h3 { font-size: 36px; color: var(--primary); margin-bottom: 15px; position: relative; padding-bottom: 15px; }
+        .sec-title h3::after { content: ''; width: 40px; height: 3px; background: var(--primary); position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); }
 
-        /* 6. Contact Section */
-        .contact { padding: 100px 0; background-color: var(--white); text-align: center; }
-        .contact-info { max-width: 600px; margin: 0 auto; background: var(--bg-light); padding: 40px; border-radius: 10px; }
-        .contact-info p { margin-bottom: 15px; font-size: 1.1rem; color: var(--text-dark); }
-        .contact-info strong { color: var(--secondary-color); margin-right: 10px; }
+        /* 5. About (회사 소개) */
+        .about-flex { display: flex; gap: 60px; align-items: center; }
+        .about-text { flex: 1; }
+        .about-text h4 { font-size: 28px; margin-bottom: 25px; line-height: 1.4; }
+        .about-text p { color: var(--text-sub); margin-bottom: 20px; }
+        .about-img { flex: 1; border-radius: 20px; overflow: hidden; box-shadow: 20px 20px 0px var(--bg-gray); }
 
-        /* 7. Footer */
-        footer { background-color: var(--secondary-color); color: rgba(255,255,255,0.7); padding: 50px 0; font-size: 0.9rem; }
-        .footer-content { text-align: center; }
-        .footer-logo { font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 20px; display: block; }
-        
-        /* 8. Responsive (모바일 최적화) */
-        @media (max-width: 768px) {
-            .section-title { font-size: 2rem; }
-            .hero-content h1 { font-size: 2.2rem; }
-            .hero-content p { font-size: 1rem; }
-            .about-wrapper { grid-template-columns: 1fr; text-align: center; }
-            .nav-links { display: none; } /* 심플함을 위해 모바일 메뉴는 숨김 (필요시 JS 필요) */
+        /* 6. Values (아이기삼 특유의 그리드 레이아웃) */
+        .values { background: var(--bg-gray); }
+        .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .value-item { background: var(--white); padding: 50px 30px; border-radius: 10px; transition: 0.3s; }
+        .value-item:hover { background: var(--primary); color: var(--white); transform: translateY(-10px); }
+        .value-item h5 { font-size: 22px; margin: 20px 0; }
+        .value-item p { font-size: 15px; opacity: 0.8; }
+
+        /* 7. Footer (기업 정보 강조) */
+        footer { background: #222; color: #aaa; padding: 60px 0; font-size: 14px; }
+        .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; }
+        .f-logo { color: var(--white); font-size: 20px; font-weight: 700; margin-bottom: 20px; }
+        .f-info p { margin-bottom: 5px; }
+        .f-contact { text-align: right; }
+        .f-contact h5 { color: var(--white); font-size: 24px; margin-bottom: 10px; }
+
+        /* 반응형 */
+        @media (max-width: 900px) {
+            .hero-content h2 { font-size: 36px; }
+            .about-flex { flex-direction: column; }
+            .value-grid { grid-template-columns: 1fr; }
+            .footer-inner { flex-direction: column; gap: 40px; }
+            .f-contact { text-align: left; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="header-container">
-            <div class="logo"><a href="#">KLC</a></div>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">회사소개</a></li>
-                    <li><a href="#services">주요사업</a></li>
-                    <li><a href="#contact">문의하기</a></li>
-                </ul>
+        <div class="container header-inner">
+            <div class="logo">KLC</div>
+            <nav class="nav-menu">
+                <a href="#home">HOME</a>
+                <a href="#about">ABOUT</a>
+                <a href="#values">VALUES</a>
+                <a href="#contact">CONTACT</a>
             </nav>
         </div>
     </header>
 
     <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Innovation & Trust,<br>This is KLC.</h1>
-            <p>KLC는 혁신적인 기술과 무한한 신뢰를 바탕으로 고객과 함께 성장합니다.</p>
-            <a href="#about" class="btn">자세히 알아보기</a>
+        <div class="container hero-content">
+            <p>Better Solution, Better Future</p>
+            <h2>KLC는 기업의 성공을 위한<br>가장 명확한 이정표를 제시합니다.</h2>
+            <div style="width: 60px; height: 4px; background: var(--white);"></div>
         </div>
     </section>
 
-    <section id="about" class="about">
+    <section id="about">
         <div class="container">
-            <h2 class="section-title">About KLC</h2>
-            <p class="section-subtitle">우리는 가치를 창출하고 미래를 선도합니다.</p>
-            
-            <div class="about-wrapper">
-                <div class="about-text">
-                    <h3>최고의 전문성을 갖춘<br>비즈니스 파트너</h3>
-                    <p>KLC는 설립 이래, 끊임없는 도전과 혁신으로 업계를 선도해왔습니다. 우리는 단순히 서비스를 제공하는 것을 넘어, 고객의 성공을 위한 최적의 솔루션을 함께 고민합니다.</p>
-                    <p>신뢰, 전문성, 그리고 혁신은 KLC를 지탱하는 핵심 가치입니다. 글로벌 스탠다드에 맞춘 서비스로 귀하의 비즈니스에 날개를 달아드리겠습니다.</p>
-                </div>
+            <div class="about-flex">
                 <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800" alt="KLC 팀 미팅">
+                    <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800" alt="비즈니스 이미지">
+                </div>
+                <div class="about-text">
+                    <h2 style="color:var(--primary); font-size: 16px; font-weight: 700; margin-bottom: 10px;">WHO WE ARE</h2>
+                    <h4>우리는 변화를 두려워하지 않는<br>전문가 집단입니다.</h4>
+                    <p>아이기삼의 철학처럼 KLC는 정직함과 전문성을 핵심 가치로 삼고 있습니다. 고객사의 비즈니스 환경을 깊이 있게 이해하고, 실질적인 성과를 만들어내는 파트너가 되겠습니다.</p>
+                    <p>우리의 목표는 단순히 숫자를 바꾸는 것이 아니라, 지속 가능한 경영의 기반을 마련하는 것입니다.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="services" class="services">
+    <section id="values" class="values">
         <div class="container">
-            <h2 class="section-title">Our Services</h2>
-            <p class="section-subtitle">KLC가 제공하는 핵심 비즈니스 솔루션입니다.</p>
-            
-            <div class="services-grid">
-                <div class="service-item">
-                    <div class="icon">📈</div>
-                    <h4>전략 컨설팅</h4>
-                    <p>시장 분석 및 기업 맞춤형 성장 전략을 수립하여 비즈니스 경쟁력을 높여드립니다.</p>
+            <div class="sec-title">
+                <h3>Our Core Values</h3>
+                <p>KLC가 지켜나가는 세 가지 약속</p>
+            </div>
+            <div class="value-grid">
+                <div class="value-item">
+                    <div style="font-size: 40px;">01</div>
+                    <h5>Professionalism</h5>
+                    <p>분야별 최고의 전문가들이 모여 최상의 결과물을 보장합니다.</p>
                 </div>
-                <div class="service-item">
-                    <div class="icon">💻</div>
-                    <h4>IT 솔루션</h4>
-                    <p>최신 기술 트렌드를 반영한 안정적이고 효율적인 IT 인프라 및 시스템을 구축합니다.</p>
+                <div class="value-item">
+                    <div style="font-size: 40px;">02</div>
+                    <h5>Trust</h5>
+                    <p>투명한 프로세스와 정직한 피드백으로 견고한 신뢰를 쌓습니다.</p>
                 </div>
-                <div class="service-item">
-                    <div class="icon">🤝</div>
-                    <h4>글로벌 파트너십</h4>
-                    <p>해외 시장 진출 및 글로벌 기업과의 네트워킹을 지원하여 사업 영역을 확장합니다.</p>
+                <div class="value-item">
+                    <div style="font-size: 40px;">03</div>
+                    <h5>Innovation</h5>
+                    <p>기존의 틀에 박힌 사고에서 벗어나 새로운 가능성을 모색합니다.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Contact Us</h2>
-            <p class="section-subtitle">KLC는 언제나 여러분의 문의를 기다립니다.</p>
-            
-            <div class="contact-info">
-                <p><strong>주소:</strong> 서울특별시 강남구 테헤란로 KLC 타워 15층</p>
-                <p><strong>전화:</strong> 02-123-4567</p>
-                <p><strong>이메일:</strong> info@klc.com</p>
-                <a href="mailto:info@klc.com" class="btn">이메일 보내기</a>
+    <footer id="contact">
+        <div class="container footer-inner">
+            <div class="f-info">
+                <div class="f-logo">KLC</div>
+                <p>상호명 : KLC (Korea Leading Consulting)</p>
+                <p>대표이사 : 홍길동 | 사업자등록번호 : 000-00-00000</p>
+                <p>주소 : 서울특별시 강남구 테헤란로 000 KLC빌딩</p>
+                <p style="margin-top: 20px;">Copyright © KLC. All Rights Reserved.</p>
             </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container footer-content">
-            <span class="footer-logo">KLC</span>
-            <p>Copyright © 2024 KLC. All Rights Reserved.</p>
-            <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.5;">서울특별시 강남구 테헤란로 123 | 대표이사: 홍길동 | 사업자등록번호: 123-45-67890</p>
+            <div class="f-contact">
+                <p>CUSTOMER CENTER</p>
+                <h5>02-123-4567</h5>
+                <p>평일 09:00 - 18:00 (주말/공휴일 휴무)</p>
+                <p>Email: contact@klc.com</p>
+            </div>
         </div>
     </footer>
 
