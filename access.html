@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE ACCESS | KARTELLEÖS CAPITAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Syncopate:wght@400;700&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #050505;
+            --text-green: #00ff66; /* 터미널 감성의 그린 또는 순백색(#e0e0e0) 중 선택 가능 */
+            --text-dim: #005522;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        /* 만약 초록색 글씨가 너무 튄다면, 아래 주석을 해제하여 모노톤으로 바꾸세요 */
+        /*
+        :root {
+            --bg: #000000;
+            --text-green: #e0e0e0;
+            --text-dim: #333333;
+        }
+        */
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-green);
+            font-family: var(--font-mono);
+            font-weight: 300;
+            margin: 0;
+            padding: 40px;
+            box-sizing: border-box;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        /* 상단 네비게이션 */
+        header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+        header a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        header a:hover { color: var(--text-green); }
+
+        /* 터미널 출력 영역 */
+        .terminal-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .output-text {
+            line-height: 1.8;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+            white-space: pre-wrap;
+        }
+
+        .highlight {
+            font-weight: 500;
+            color: #ffffff;
+            background-color: rgba(0, 255, 102, 0.1);
+            padding: 2px 5px;
+        }
+
+        /* 입력 폼 (터미널 명령어 입력줄처럼 위장) */
+        .input-line {
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+
+        .prompt {
+            color: var(--text-dim);
+            margin-right: 10px;
+        }
+
+        .terminal-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-green);
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* 깜빡이는 커서 효과 */
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 15px;
+            background-color: var(--text-green);
+            animation: blink 1s infinite steps(1);
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        /* 푸터 시스템 정보 */
+        footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            body { padding: 20px; }
+            .output-text { font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html">← ABORT_CONNECTION</a>
+        <div style="color: var(--text-dim);">SYSTEM: SECURE_LINE</div>
+    </header>
+
+    <div class="terminal-container">
+        <div class="output-text" id="terminalOutput"></div>
+
+        <div class="input-line">
+            <span class="prompt">guest@klc_access:~$</span>
+            <input type="text" id="userInput" class="terminal-input" placeholder="Type your credentials or message..." autocomplete="off">
+            <span class="cursor" id="inputCursor"></span>
+        </div>
+    </div>
+
+    <footer>
+        <div>LOC: UNKNOWN</div>
+        <div style="font-family: 'Syncopate', sans-serif;">KARTELLEOS CAPITAL</div>
+        <div>PORT: 8080</div>
+    </footer>
+
+    <script>
+        // 타자 치는 듯한 효과를 주는 텍스트 데이터
+        const message = 
+`[SYSTEM] Connection established.
+[SYSTEM] Decrypting manifesto...
+
+우리는 팀원을 구하지 않습니다.
+미래를 공유할 <span class="highlight">리더</span>를 찾습니다.
+
+카르텔레오스 캐피탈(KLC)의 문은 모두에게 열려있지 않습니다.
+본능의 가치를 이해하고, 자신의 욕망을 사명으로 바꿀 준비가 된 자만이
+이 시스템에 흔적을 남길 수 있습니다.
+
+자격이 있다고 판단된다면, 아래에 당신의 연결 고리(이메일 또는 메시지)를 입력하십시오.
+우리가 당신을 찾아낼 것입니다.`;
+
+        const outputElement = document.getElementById('terminalOutput');
+        let index = 0;
+
+        // 글자가 타이핑되는 효과 함수
+        function typeWriter() {
+            if (index < message.length) {
+                // HTML 태그(span 등)는 한 번에 출력하기 위한 처리
+                if (message.substr(index, 1) === '<') {
+                    let tagCloseIndex = message.indexOf('>', index);
+                    outputElement.innerHTML += message.substring(index, tagCloseIndex + 1);
+                    index = tagCloseIndex + 1;
+                } else {
+                    outputElement.innerHTML += message.charAt(index);
+                    index++;
+                }
+                setTimeout(typeWriter, 30); // 타이핑 속도 조절
+            }
+        }
+
+        // 페이지 로드 후 타이핑 시작
+        window.onload = () => {
+            typeWriter();
+            document.getElementById('userInput').focus();
+        };
+
+        // 입력 폼에 포커스가 유지되도록 설정
+        document.addEventListener('click', () => {
+            document.getElementById('userInput').focus();
+        });
+
+        // 엔터키를 눌렀을 때의 액션 (비밀스러운 전송 연출)
+        const inputField = document.getElementById('userInput');
+        inputField.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && this.value.trim() !== '') {
+                const val = this.value;
+                outputElement.innerHTML += `\n\n<span style="color: var(--text-dim);">[SENT]</span> ${val}\n[SYSTEM] Data encrypted. We will find you if you are worthy.\n[SYSTEM] Disconnecting...`;
+                this.value = '';
+                this.disabled = true;
+                document.getElementById('inputCursor').style.display = 'none';
+                
+                // 3초 후 자동으로 메인 페이지로 튕겨나가는 연출
+                setTimeout(() => {
+                    location.href = 'index.html';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
