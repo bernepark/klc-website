@@ -203,51 +203,42 @@
         });
 
         // 엔터키를 눌렀을 때의 액션 (비밀스러운 전송 연출)
-        const inputField = document.getElementById('userInput');
-        // --- [2단계 핵심 코드] ---
-
-// 1. 여기에 1단계에서 복사한 본인의 Google 웹 앱 URL을 붙여넣으세요.
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw-InAiuKvDQ2XuxzxWpImmepKKQc3q_-t82hxC1rIibh0TsQX5FYKBKtpR77qsO61Q/exec"; 
-
-const inputField = document.getElementById('userInput');
-const outputElement = document.getElementById('terminalOutput');
-
-inputField.addEventListener('keypress', function(e) {
-    // 엔터키를 눌렀고, 입력창이 비어있지 않을 때만 실행
-    if (e.key === 'Enter' && this.value.trim() !== '') {
-        const val = this.value;
         
-        // 화면에 전송 중임을 알리는 메시지 출력 (비밀 조직 컨셉)
-        outputElement.innerHTML += `\n\n<span style="color: var(--text-dim);">[UPLINKING_TO_SERVER...]</span>`;
+        const inputField = document.getElementById('userInput');
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw-InAiuKvDQ2XuxzxWpImmepKKQc3q_-t82hxC1rIibh0TsQX5FYKBKtpR77qsO61Q/exec"; // 1단계에서 만든 URL
 
-        // 2. Google Sheets로 데이터 쏘기 (fetch API 사용)
-        fetch(WEB_APP_URL, {
-            method: "POST",
-            mode: "no-cors", // 중요: 구글 보안 정책 우회를 위해 설정
-            body: JSON.stringify({ message: val }),
-            headers: { 'Content-Type': 'application/json' }
-        })
-        .then(() => {
-            // 전송 성공 시 화면 연출
-            outputElement.innerHTML += `\n<span style="color: var(--text-dim);">[SUCCESS]</span> DATA_LOGGED: ${val}\n[SYSTEM] IDENTITY_ENCRYPTED. WE_WILL_CONTACT_YOU.\n[SYSTEM] TERMINATING_SESSION...`;
-            
-            // 입력창 봉쇄 (더 이상 입력 못 하게 함)
-            inputField.value = '';
-            inputField.disabled = true;
-            document.getElementById('inputCursor').style.display = 'none';
-            
-            // 3초 후 메인 페이지로 자동 이동 (강제 퇴장 연출)
-            setTimeout(() => {
-                location.href = 'index.html';
-            }, 3000);
-        })
-        .catch(err => {
-            // 네트워크 오류 발생 시
-            outputElement.innerHTML += `\n<span style="color: #ff0000;">[ERROR]</span> UPLINK_FAILED. CONNECTION_LOST.`;
-            console.error(err);
+        inputField.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && this.value.trim() !== '') {
+                const val = this.value;
+                
+                // 1. 화면에 전송 중임을 알리는 문구 출력
+                outputElement.innerHTML += `\n\n<span style="color: var(--text-dim);">[UPLINKING_TO_SERVER...]</span>`;
+
+                // 2. 실제로 구글 시트로 데이터를 보내는 통신 시작
+                fetch(WEB_APP_URL, {
+                    method: "POST",
+                    mode: "no-cors", 
+                    body: JSON.stringify({ message: val }),
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                .then(() => {
+                    // 3. 전송 성공 후 연출 (성공 메시지 출력 후 강제 퇴장)
+                    outputElement.innerHTML += `\n<span style="color: var(--text-dim);">[SUCCESS]</span> DATA_LOGGED: ${val}\n[SYSTEM] IDENTITY_ENCRYPTED. WE_WILL_CONTACT_YOU.\n[SYSTEM] TERMINATING_SESSION...`;
+                    
+                    inputField.value = '';
+                    inputField.disabled = true;
+                    document.getElementById('inputCursor').style.display = 'none';
+                    
+                    setTimeout(() => {
+                        location.href = 'index.html';
+                    }, 3000);
+                })
+                .catch(err => {
+                    outputElement.innerHTML += `\n<span style="color: #ff0000;">[ERROR]</span> UPLINK_FAILED. CONNECTION_LOST.`;
+                });
+            }
         });
-    }
-});
+        
     </script>
 </body>
 </html>
